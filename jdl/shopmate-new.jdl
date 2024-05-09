@@ -1,0 +1,37 @@
+entity Trip {
+	name String,
+	budget Double,
+    date LocalDate
+}
+
+entity Item {
+    name String,
+    category Category,
+    price Double,
+    quantity Integer
+}
+
+enum Category {
+    FOOD(Food),SUPPLIES(Supplies),OTHER(Other)
+}
+
+entity Vendor {
+	name String,
+    city String
+}
+entity UserProfile {
+  nickName String
+}
+relationship OneToOne {
+     UserProfile{user(login)} to User with builtInEntity
+}
+
+relationship OneToMany {
+  Trip{items} to Item{trips},
+  UserProfile{trips} to Trip{userProfile}
+}
+relationship ManyToOne {
+    Trip{vendor} to Vendor{trips}
+}
+
+

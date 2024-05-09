@@ -1,0 +1,38 @@
+
+entity Trip {
+	name String,
+	budget Double,
+    date LocalDate
+}
+
+entity Item {
+	name String,
+    price Double,
+    quantity Integer
+}
+
+entity Category {
+    name String
+}
+
+entity Vendor {
+	name String,
+    city String
+}
+entity UserProfile {
+  nickName String
+}
+relationship OneToOne {
+     UserProfile{user(login)} to User
+}
+
+relationship OneToMany {
+  Trip{items} to Item{trips},
+  UserProfile{trips} to Trip{userProfile}
+}
+relationship ManyToOne {
+	Item{category} to Category,
+    Trip{vendor} to Vendor{trips}
+}
+
+
